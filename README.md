@@ -37,10 +37,10 @@ Node.js: Download & Install Node.js (which includes npm).
 pnpm: A fast, disk space efficient package manager.
 
 Foundry: Follow the instructions on the Foundry Book to install forge and anvil.
-
+```
 curl -L https://foundry.paradigm.xyz | bash
 foundryup
-
+```
 ⚙️ Getting Started
 Follow these steps to get the Vesting Application running on your local machine:
 
