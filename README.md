@@ -1,14 +1,14 @@
-Vesting Application
+# Vesting Application
 This project implements a Cliff-based Vesting Application, designed to manage the gradual release of digital tokens to stakeholders over a predetermined period. It ensures transparency and automation by leveraging smart contracts on the blockchain.
 
-✨ Features
+# Features
 Cliff Vesting Schedule: Tokens are locked for an initial "cliff period," after which a lump sum is released, followed by a regular vesting schedule.
 
 Blockchain Integration: Built on modern Ethereum development tools for secure and transparent token management.
 
 Wallet Connection: Seamless integration with various cryptocurrency wallets for user interaction.
 
-🚀 Technologies Used
+# Technologies Used
 Frontend:
 
 Next.js: A React framework for building fast, server-rendered React applications.
@@ -29,7 +29,7 @@ Foundry: A blazing fast, portable and modular toolkit for Ethereum application d
 
 Anvil: A local testnet node, part of the Foundry suite, for fast and reliable development and testing of smart contracts.
 
-📋 Prerequisites
+# Prerequisites
 Before you begin, ensure you have the following installed:
 
 Node.js: Download & Install Node.js (which includes npm).
@@ -45,18 +45,21 @@ foundryup
 Follow these steps to get the Vesting Application running on your local machine:
 
 1. Clone the Repository
+```
 git clone https://github.com/Pratyushdube/VestingDapp.git
 cd vesting-application # or the name of your cloned directory
+```
 
 2. Initialize pnpm
 This step ensures pnpm is set up in the root of your project if you haven't done so.
-
+```
 pnpm init
+```
 
 3. Smart Contract Setup and Deployment
 Navigate to the contracts directory, initialize Foundry, build your contracts, start Anvil, and deploy your contract.
 
-# Initialize Foundry in the contracts directory (if not already done)
+### Initialize Foundry in the contracts directory (if not already done)
 forge init contracts
 
 # Build the smart contracts
