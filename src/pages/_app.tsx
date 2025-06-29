@@ -8,6 +8,7 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import VestingDapp from '../components/VestingDapp';
 
 import { config } from '../wagmi';
+// This is the main entry point for the Next.js application.
 
 const client = new QueryClient();
 
