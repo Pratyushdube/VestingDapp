@@ -1,29 +1,118 @@
-This is a [RainbowKit](https://rainbowkit.com) + [wagmi](https://wagmi.sh) + [Next.js](https://nextjs.org/) project bootstrapped with [`create-rainbowkit`](/packages/create-rainbowkit).
+Vesting Application
+This project implements a Cliff-based Vesting Application, designed to manage the gradual release of digital tokens to stakeholders over a predetermined period. It ensures transparency and automation by leveraging smart contracts on the blockchain.
 
-## Getting Started
+✨ Features
+Cliff Vesting Schedule: Tokens are locked for an initial "cliff period," after which a lump sum is released, followed by a regular vesting schedule.
 
-First, run the development server:
+Blockchain Integration: Built on modern Ethereum development tools for secure and transparent token management.
 
-```bash
-npm run dev
-```
+Wallet Connection: Seamless integration with various cryptocurrency wallets for user interaction.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🚀 Technologies Used
+Frontend:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Next.js: A React framework for building fast, server-rendered React applications.
 
-## Learn More
+wagmi: A collection of React Hooks for Ethereum that makes it easy to interact with smart contracts, wallets, and more.
 
-To learn more about this stack, take a look at the following resources:
+viem: A lightweight, type-safe, and performant TypeScript interface for Ethereum that provides low-level control for interacting with the blockchain.
 
-- [RainbowKit Documentation](https://rainbowkit.com) - Learn how to customize your wallet connection flow.
-- [wagmi Documentation](https://wagmi.sh) - Learn how to interact with Ethereum.
-- [Next.js Documentation](https://nextjs.org/docs) - Learn how to build a Next.js application.
+RainbowKit: A beautiful and easy-to-use wallet connection library for dApps.
 
-You can check out [the RainbowKit GitHub repository](https://github.com/rainbow-me/rainbowkit) - your feedback and contributions are welcome!
+Tailwind CSS: A utility-first CSS framework for rapidly building custom designs.
 
-## Deploy on Vercel
+Smart Contracts:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Solidity: The primary language for writing Ethereum smart contracts.
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Foundry: A blazing fast, portable and modular toolkit for Ethereum application development, used for smart contract development, testing, and deployment.
+
+Anvil: A local testnet node, part of the Foundry suite, for fast and reliable development and testing of smart contracts.
+
+📋 Prerequisites
+Before you begin, ensure you have the following installed:
+
+Node.js: Download & Install Node.js (which includes npm).
+
+pnpm: A fast, disk space efficient package manager.
+
+npm install -g pnpm
+
+Foundry: Follow the instructions on the Foundry Book to install forge and anvil.
+
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+
+⚙️ Getting Started
+Follow these steps to get the Vesting Application running on your local machine:
+
+1. Clone the Repository
+git clone <your-repository-url>
+cd vesting-application # or the name of your cloned directory
+
+2. Initialize pnpm
+This step ensures pnpm is set up in the root of your project if you haven't done so.
+
+pnpm init
+
+3. Smart Contract Setup and Deployment
+Navigate to the contracts directory, initialize Foundry, build your contracts, start Anvil, and deploy your contract.
+
+# Navigate into the contracts directory
+cd contracts
+
+# Initialize Foundry in the contracts directory (if not already done)
+forge init .
+
+# Build the smart contracts
+forge build
+
+# Open a NEW TERMINAL and start the local Anvil blockchain
+# Keep this terminal running in the background for the duration of development
+anvil
+
+# In your ORIGINAL TERMINAL (still in the 'contracts' directory), deploy your contract
+# Make sure Anvil is running on http://127.0.0.1:8545 before executing this command
+forge create src/Counter.sol:Counter --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+# Note: Replace 'src/Counter.sol:Counter' with your actual Vesting contract path and name,
+# and ensure the private key matches your Anvil's default (or specified) private key.
+
+4. Frontend Setup and Run
+Navigate back to the project root, set up the frontend, and start the development server.
+
+# Navigate back to the project root
+cd ..
+
+# Create the React frontend using Vite (if not already created)
+pnpm create vite frontend --template react
+
+# Navigate into the frontend directory
+cd frontend
+
+# Install frontend dependencies
+pnpm install
+
+# Add viem as a dependency (if not already included by create-vite or wagmi)
+pnpm add viem
+
+# Start the frontend development server
+pnpm run dev
+
+Open http://localhost:3000 in your browser to view the application. The page will hot-reload as you make edits to the frontend files.
+
+📚 Learn More
+Next.js Documentation
+
+wagmi Documentation
+
+viem Documentation
+
+RainbowKit Documentation
+
+Foundry Documentation
+
+🤝 Contributing
+Contributions are welcome! Please feel free to open issues or submit pull requests.
+
+📄 License
+[Specify your license here, e.g., MIT, Apache 2.0, etc.]
