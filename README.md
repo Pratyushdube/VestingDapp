@@ -60,40 +60,48 @@ pnpm init
 Navigate to the contracts directory, initialize Foundry, build your contracts, start Anvil, and deploy your contract.
 
 ### Initialize Foundry in the contracts directory (if not already done)
+```
 forge init contracts
-
-# Build the smart contracts
+```
+### Build the smart contracts
+```
 forge build
-
-# Open a NEW TERMINAL and start the local Anvil blockchain
-# Keep this terminal running in the background for the duration of development
+```
+### Open a NEW TERMINAL and start the local Anvil blockchain
+### Keep this terminal running in the background for the duration of development
+```
 pnpm anvil
+```
+### In your ORIGINAL TERMINAL (still in the 'contracts' directory), deploy your contract
+### Make sure Anvil is running on http://127.0.0.1:8545 before executing this command
 
-# In your ORIGINAL TERMINAL (still in the 'contracts' directory), deploy your contract
-# Make sure Anvil is running on http://127.0.0.1:8545 before executing this command
-
+```
 forge create src/Counter.sol:Counter --rpc-url http://127.0.0.1:8545 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
-# Note: Replace 'src/Counter.sol:Counter' with your actual Vesting contract path and name,
+```
+### Note: Replace 'src/Counter.sol:Counter' with your actual Vesting contract path and name,
 
 4. Frontend Setup and Run
 Navigate back to the project root, set up the frontend, and start the development server.
 
-# Navigate back to the project root
-cd ..
-
-# Create the React frontend using Vite (if not already created)
+### Create the React frontend using Vite (if not already created)
+```
 pnpm create vite frontend --template react
-
-# Navigate into the frontend directory
+```
+### Navigate into the frontend directory
+```
 cd frontend
-
-# Install frontend dependencies
+```
+### Install frontend dependencies
+```
 pnpm install
-
-# Add viem as a dependency (if not already included by create-vite or wagmi)
+```
+### Add viem as a dependency (if not already included by create-vite or wagmi)
+```
 pnpm add viem
-
-# Start the frontend development server
+```
+### Start the frontend development server
+```
 pnpm run dev
+```
 
 Open http://localhost:3000 in your browser to view the application. The page will hot-reload as you make edits to the frontend files.
