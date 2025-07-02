@@ -80,20 +80,27 @@ function VestingDapp() {
     chainId: ANVIL_CHAIN_ID,
     query: {
       enabled: isConnected && isAddress(checkAddress), // Only enable if connected and address is valid
+      retry: false  
     },
   });
 
   // Handle success and error for vested amount
   useEffect(() => {
-    if (vestedAmountData !== undefined && vestedAmountData !== null) {
-//       setVestedAmount(formatEther(vestedAmountData as bigint));
-         setVestedAmount(vestedAmountData as string); // Store as string directly
-    } else if (vestedAmountError) {
-      console.error("Error checking vested amount:", vestedAmountError);
-      setVestedAmount(null);
-      setStatusMessage(`Failed to check vested amount: ${vestedAmountError?.message || vestedAmountError}`);
-    }
-  }, [vestedAmountData, vestedAmountError]);
+    if (vestedAmountData !== undefined && vestedAmountData !== null) {
+      setVestedAmount(formatEther(vestedAmountData as bigint)); // Ensure you format BigInt from contract correctly
+      setStatusMessage(''); // Clear any previous status message on success
+    } else if (vestedAmountError) {
+      // console.error("Error checking vested amount:", vestedAmountError);
+      setVestedAmount(null);
+      setStatusMessage("No vesting schedule found for this address.");
+      // Explicitly check for the "No vesting schedule found" error message
+      // if (vestedAmountError.message.includes("No vesting schedule found for this user")) {
+      //   setStatusMessage("No vesting schedule found for this address.");
+      // } else {
+      //   setStatusMessage(`Failed to check vested amount: ${vestedAmountError?.message || "An unknown error occurred."}`);
+      // }
+    }
+  }, [vestedAmountData, vestedAmountError]);
 
   // Update contract owner state when ownerData changes
   useEffect(() => {
@@ -211,7 +218,7 @@ function VestingDapp() {
         value: amountBigInt, // ETH amount in wei as BigInt
       });
     } catch (error: any) {
-      console.error("Error preparing or sending create vesting schedule transaction:", error);
+//       console.error("Error preparing or sending create vesting schedule transaction:", error);
       setStatusMessage(`Failed to prepare or send transaction: ${error.message}`);
     }
   };
@@ -232,7 +239,7 @@ function VestingDapp() {
     try {
       await refetchVestedAmount();
     } catch (error: any) {
-      console.error("Error checking vested amount:", error);
+//       console.error("Error checking vested amount:", error);
       setVestedAmount(null);
       setStatusMessage(`Failed to check vested amount: ${error?.message || error}`);
     }
@@ -268,10 +275,10 @@ function VestingDapp() {
         refetchVestedAmount();
       }
     } else if (isClaimBalanceError) {
-      console.error("Error claiming balance (sending):", claimBalanceError);
+//       console.error("Error claiming balance (sending):", claimBalanceError);
       setStatusMessage(`Failed to claim balance: ${claimBalanceError?.message || 'Transaction error.'}`);
     } else if (isClaimBalanceReceiptError) {
-      console.error("Error confirming claim balance:", claimBalanceReceiptError);
+//       console.error("Error confirming claim balance:", claimBalanceReceiptError);
       setStatusMessage(`Failed to confirm claim balance: ${claimBalanceReceiptError?.message || 'Confirmation error.'}`);
     }
   }, [isClaimBalanceConfirmed, isClaimBalanceError, claimBalanceError, isClaimBalanceReceiptError, claimBalanceReceiptError, account, refetchVestedAmount]);
@@ -347,6 +354,13 @@ function VestingDapp() {
           <h2 className="text-2xl font-bold text-purple-200 mb-4 flex items-center gap-2">
             <RiInformationLine className="text-purple-300" /> Create Vesting Schedule (Owner Only)
           </h2>
+          {/* New conditional message for non-owners */}
+                    {isConnected && contractOwner && account && account.toLowerCase() !== contractOwner.toLowerCase() && (
+                        <p className="text-yellow-300 mb-4 p-2 rounded-lg bg-yellow-900 bg-opacity-30 flex items-center gap-2">
+                            <RiAlertFill /> This action is restricted to the contract owner.
+                        </p>
+                    )}
+
           <form onSubmit={handleCreateVestingSchedule} className="space-y-4">
             <div>
               <label htmlFor="recipient" className="block text-purple-100 text-sm font-bold mb-2">Recipient Address:</label>

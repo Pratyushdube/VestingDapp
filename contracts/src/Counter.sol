@@ -90,6 +90,8 @@ contract Counter {
         uint claimableAmount = checkVestedAmount(_user);
         if(claimableAmount > 0){
                 myVestingSchedule.claimedAmount += claimableAmount;
+                payable(msg.sender).transfer(claimableAmount);
+                myVestingSchedule.exists = false;
             }
         else { 
             revert("No amount to claim");
